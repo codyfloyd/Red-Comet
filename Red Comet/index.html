@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Red Comet</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comet {
+      width: 240px;
+      transform: translate(60vw, -60vh) scale(0.4) rotate(160deg);
+      animation: crash-in 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      z-index: 2;
+    }
+
+    @keyframes crash-in {
+      0% {
+        transform: translate(60vw, -60vh) scale(0.35) rotate(160deg);
+        opacity: 0;
+      }
+      60% {
+        opacity: 1;
+      }
+      80% {
+        transform: translate(0, 0) scale(1.08) rotate(-4deg);
+      }
+      100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+    }
+
+    .impact-ring {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 2px solid rgba(229, 57, 53, 0.25);
+      animation: ripple 1.3s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    .actions {
+      margin-top: 48px;
+      display: none; /* removed buttons entirely */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="impact-ring"></div>
+    <img src="assets/comet.png" alt="Red Comet logo" class="comet" />
+  </div>
+
+  <script>
+    const comet = document.querySelector('.comet');
+
+    // Enable click only after animation finishes
+    comet.addEventListener('animationend', () => {
+      comet.style.cursor = 'pointer';
+
+      comet.addEventListener('click', () => {
+        window.location.href = 'roadmap.html';
+      });
+    });
+  </script>
+
+</body>
+</html>
